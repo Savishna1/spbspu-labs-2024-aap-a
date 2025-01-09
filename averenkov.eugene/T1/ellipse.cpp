@@ -1,21 +1,25 @@
 #include "ellipse.hpp"
 
-averenkov::Ellipse::Ellipse(averenkov::point_t center_, double radius_v_, double radius_h_)
- : center(center_), radius_v(radius_v_), radius_h(radius_h_)
+averenkov::Ellipse::Ellipse(point_t center_, double radius_v_, double radius_h_):
+  center(center_),
+  radius_v(radius_v_),
+  radius_h(radius_h_)
 {
 }
 
-void averenkov::Ellipse::scale(averenkov::point_t s, double factor)
+void averenkov::Ellipse::scale(double factor)
 {
-  center.x = (center.x - s.x) * factor + s.x;
-  center.y = (center.y - s.y) * factor + s.y;
+  if (factor <= 0)
+  {
+    throw "invalid input";
+  }
   radius_h *= factor;
   radius_v *= factor;
 }
 
 double averenkov::Ellipse::getArea() const
 {
-  return 3.14 * radius_h * radius_v;
+  return 3.1416 * radius_h * radius_v;
 }
 
 averenkov::rectangle_t averenkov::Ellipse::getFrameRect() const
